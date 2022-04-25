@@ -50,13 +50,13 @@ func (r *RequestHandler) setAuthorization(req *http.Request) *http.Request {
 	json.Unmarshal([]byte(secretsString), &jsonMap)
 	switch jsonMap["auth"] {
 	case "Basic":
-		baa := auth.BasicAuthParameter{
+		baa := auth.BasicAuthRequest{
 			Username: jsonMap["username"],
 			Password: jsonMap["password"],
 		}
 		req = baa.SetAuthorizationHeader(req)
 	case "Bearer":
-		bea := auth.BearerAuthParameter{
+		bea := auth.BearerAuthRequest{
 			Token: jsonMap["token"],
 		}
 		req = bea.SetAuthorizationHeader(req)
